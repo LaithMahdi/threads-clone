@@ -1,9 +1,34 @@
-import React from 'react'
+"use client";
+import { sidebarLinks } from "@/constants";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import React from "react";
 
 const Bottombar = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   return (
-    <div>Bottombar</div>
-  )
-}
+    <section className="bottombar">
+      <div className="bottombar_container">
+        {sidebarLinks.map((link) => {
+          const isActive = pathname === link.route;
+          return (
+            <Link
+              href={link.route}
+              key={link.label}
+              className={`bottombar_link ${isActive && "bg-primary-500"}`}
+            >
+              <Image src={link.imgURL} alt="icon" width={24} height={24} />
+              <p className="text-subtle-medium text-light-1 max-sm:hidden line-clamp-1">
+                {link.label}
+              </p>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
 
-export default Bottombar
+export default Bottombar;
