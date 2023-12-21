@@ -4,7 +4,7 @@ import React from 'react'
 
 const page = async() => {
     const user=await currentUser();
-    const userInfo={}
+    const userInfo={};
     const userData={
         id: user?.id as string,
         objectId: userInfo?._id,
@@ -20,7 +20,7 @@ const page = async() => {
       <p className="mt-3 text-base-regular text-light-2">
         Complete your profile to use Threads
       </p>
-      <section className="mt-9 bg-dark-2 p-10">
+      <section className="mt-9 bg-dark-2 p-10 rounded-xl">
         <AccountProfile user={userData} btnTitle="Continue" />
       </section>
     </main>
