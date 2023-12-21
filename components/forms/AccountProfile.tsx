@@ -68,7 +68,7 @@ const AccountProfile = ({user,btnTitle}:AccountProfileProps) => {
         path: pathname,
       });
       
-      if (pathname === "prfile/edit") {
+      if (pathname === "/profile/edit") {
         router.back();
       } else {
         router.push("/");
