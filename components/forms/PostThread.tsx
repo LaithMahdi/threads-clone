@@ -1,12 +1,10 @@
 "use client"
-import {  useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {zodResolver} from '@hookform/resolvers/zod'
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -47,7 +45,7 @@ const PostThread = ({userId}:{userId: string}) => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="mt-10 flex flex-col justify-start gap-10"
       >
-         <FormField
+        <FormField
           control={form.control}
           name="thread"
           render={({ field }) => (
@@ -56,20 +54,19 @@ const PostThread = ({userId}:{userId: string}) => {
                 Content
               </FormLabel>
               <FormControl className="no-focus border border-dark-1 bg-dark-3 text-light-1">
-                <Textarea
-                rows={15}
-                  
-                  {...field}
-                />
+                <Textarea rows={15} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-primary-500"> Post threads </Button>
-        </form>
-        </Form>
-  )
+        <Button type="submit" className="bg-primary-500">
+          {" "}
+          Post threads{" "}
+        </Button>
+      </form>
+    </Form>
+  );
 }
 
 export default PostThread
