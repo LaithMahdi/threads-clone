@@ -45,7 +45,6 @@ export async function updateUser(
     }
 }
 
-
 export async function fetchUser(userId: string) {
     try {
         conncetToDB();
@@ -125,5 +124,28 @@ export async function fetchUsers({
         return { users, isNext };
     } catch (error: any) {
         throw new Error(`Failed to fetch users: ${error.message}`);
+    }
+}
+
+export async function getActivity(userId: string) {
+    try {
+        conncetToDB();
+        const userThread = await Thread.find({ author: userId });
+
+        const childThreadIds = userThread.reduce((acc, userThread) => {
+            return acc.concat(userThread.children)
+        },[])
+
+        const replies = await Thread.find({
+            _id: { $in: childThreadIds },
+            author: { $ne: userId }
+        }).populate({
+            path: 'author',
+            model: User,
+            select: 'name image _id'
+        });
+        return replies;
+    } catch (error: any) {
+        throw new Error(`Failed to fetch activity ${error.message}`);
     }
 }
