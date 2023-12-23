@@ -2,6 +2,7 @@ import { fetchUserPosts } from '@/lib/actions/user.actions'
 import { redirect } from 'next/navigation';
 import React from 'react'
 import ThreadCard from '../cards/ThreadCard';
+import { fetchCommunityPosts } from '@/lib/actions/community.actions';
 
 interface ThreadTabProps{
     currentUserId : string,
@@ -10,12 +11,18 @@ interface ThreadTabProps{
 }
 
 const ThreadTab = async ({
-    currentUserId,
-accountId,
-accountType
-}:ThreadTabProps) => {
-    let result = await fetchUserPosts(accountId);
-    if (!result)  redirect('/')
+  currentUserId,
+  accountId,
+  accountType,
+}: ThreadTabProps) => {
+  let result: any;
+  if (accountType === "Community") {
+    result = await fetchCommunityPosts(accountId);
+  } else {
+    result = await fetchUserPosts(accountId);
+  }
+
+  if (!result) redirect("/");
   return (
     <section className="mt-9 flex flex-col gap-10">
       {result.threads.map((thread: any) => (
@@ -37,6 +44,6 @@ accountType
       ))}
     </section>
   );
-}
+};
 
 export default ThreadTab

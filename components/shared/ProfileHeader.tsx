@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import React from 'react'
 
 interface ProfilProps {
   accountId: string;
@@ -8,6 +7,7 @@ interface ProfilProps {
   username: string;
   imgUrl: string;
   bio: string;
+  type?: 'User' | 'Community';
 }
 
 
@@ -17,7 +17,8 @@ const ProfileHeader = ({
     name,
    username,
     imgUrl,
-    bio
+    bio,
+    type
 }:ProfilProps) => {
   return (
     <div className="flex w-full flex-col justify-start">
